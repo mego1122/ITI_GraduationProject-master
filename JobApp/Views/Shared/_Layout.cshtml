@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+   
+
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/Content/img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--
+    CSS
+    ============================================= -->
+    @*<link rel="stylesheet" href="~/Content/bootstrap.css">*@
+    <link rel="stylesheet" href="~/Content/css/linearicons.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/css/animate.min.css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+</head>
+<body>
+
+
+    <header id="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, .5)), url(../../Content/img/3333.jpg);background-position: center;background-repeat: no-repeat;">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+               
+                <nav id="nav-menu-container">
+
+                    <ul class="nav-menu">
+                        <li><img class="logo" src="~/Content/img/logo.png" alt="" title="" /></li>
+                        <li class="menu-active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("All Jobs", "GetAllJobs", "Jobs")</li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Create Category", "Create", "Categories")</li>
+                            <li>@Html.ActionLink("Create Role", "CreateRole", "Roles")</li>
+
+                        }
+
+                    </ul>
+                    @Html.Partial("_Login")
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </div>
+    </header>
+    
+    <!-- #header -->
+
+
+
+
+    <div class="container"  style="margin-top: 4%">
+        @RenderBody()
+
+    </div>
+
+
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, .5)), url(../../Content/img/3333.jpg);background-position: center;background-repeat: no-repeat;">
+      
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-12">
+                    <div class="single-footer-widget">
+                        <h6>Top Products</h6>
+                        <ul class="footer-nav">
+                            <li><a href="#">Managed Website</a></li>
+                            <li><a href="#">Manage Reputation</a></li>
+                            <li><a href="#">Power Tools</a></li>
+                            <li><a href="#">Marketing Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6  col-md-12">
+                    <div class="single-footer-widget newsletter">
+                        <h6>Newsletter</h6>
+                        <p>You can trust us. we only send promo offers, not a single spam.</p>
+                        <div id="mc_embed_signup">
+                            @*<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                                <div class="form-group row" style="width: 100%">
+                                    <div class="col-lg-8 col-md-12">
+                                        <input name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+                                        <div style="position: absolute; left: -5000px;">
+                                            <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                        </div>
+                                    </div>*@
+
+                                    <div class="col-lg-4 col-md-12">
+                                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nw-btn primary-btn" })
+
+                                    </div>
+                                @*</div>
+                                <div class="info" style="margin:2%"></div>
+                            </form>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <div class="single-footer-widget mail-chimp">
+                        <h6 class="mb-20">Instragram Feed</h6>
+                        <ul class="instafeed d-flex flex-wrap">
+                            <li><img src="~/Content/img/i1.jpg" alt=""></li>
+                            <li><img src="~/Content/img/i2.jpg" alt=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer Area -->
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Content/js/popper.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script src="~/Content/js/easing.min.js"></script>
+    <script src="~/Content/js/hoverIntent.js"></script>
+    <script src="~/Content/js/superfish.min.js"></script>
+    <script src="~/Content/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.sticky.js"></script>
+    <script src="~/Content/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/js/parallax.min.js"></script>
+    <script src="~/Content/js/mail-script.js"></script>
+    <script src="~/Content/js/main.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

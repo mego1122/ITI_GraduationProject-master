@@ -1,0 +1,148 @@
+﻿@model IEnumerable<JobApp.Models.Job>
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Add New Job", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<h2 style="font-weight:bold;color:darkslateblue">List Of Jobs</h2>
+
+
+<table id="jobs" class="table table-responsive table-bordered table-hover" style="text-align:center">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobImage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr font-weight:bold">
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobContent)
+            </td>
+            <td>
+                <img src="~/Uploads/@Html.DisplayFor(model=>item.JobImage)"
+                     class="img-thumbnail" style="width:100px; height:100px" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })*@
+                <button class="btn btn-danger js-delete" data-id="@item.Id">Delete</button>
+
+
+                @*<input type="submit" value="Details" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning anchorDetail" />*@
+                @*<a href='@Url.Action("Details", new { id = item.Id })' class="ajax">Details</a>*@
+                @*<a href='@Url.Action("Details", new { id = item.Id })' data-toggle="modal" data-target="#exampleModal" class="ajax">Details</a>*@
+                <button type="button" class="btn btn-warning modal-link"
+                        data-targeturl="@Url.Action("Details","Jobs",new { id = item.Id })">
+                    Details
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*<div id='myModal' class='modal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+
+    </div>*@
+
+@*<div id="TargetDiv"></div>*@
+
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <a href="#close" title="Close" class="modal-close-btn">X</a>
+    <div class="modal-content">
+        <div class="modal-body"></div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    @*<script>
+                $(document).ready(function () {
+                    $(".ajax").on("click", function (e) {
+                        e.preventDefault();
+                        var elementUrl = $(this).attr('href');
+                        $.ajax({
+                            url: elementUrl,
+                            cache: false,
+                            success: function (data) {
+                                $('#TargetDiv').html(data);
+                            }
+                        });
+                    });
+                });
+        </script>*@
+
+<script>
+         $(document).ready(function () {
+             //var table = $("#jobs").DataTable();
+
+             $("#jobs").on("click", ".js-delete", function () {
+                 var button = $(this);
+
+                 bootbox.confirm("Are you sure you want to delete this job?", function (result) {
+                     if (result) {
+                         $.ajax({
+                             url: "/jobs/Delete/" + button.data("id"),
+                             method: "POST",
+                             success: function () {
+                                 //table.row(button.parents("tr")).remove().draw();
+                                 button.parents("tr").remove();
+                             }
+                         });
+                     }
+                 });
+             });
+         });
+</script>
+
+    <script>
+        $(function () {
+
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+
+                $("#modal-container").remove();
+
+                $.get($(this).data("targeturl"), function (data) {
+
+                    $('<div id="modal-container" class="modal fade">' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data + '</div></div>').modal();
+
+                });
+            });
+        });
+    </script>
+
+}
+

@@ -1,0 +1,58 @@
+﻿@model JobApp.Models.Job
+<div style="margin:2%">
+    <h3 style="color:darkcyan">Details About This Job</h3>
+    <hr />
+    <div style="border:groove 1px #ebebeb;border-radius:7px; margin: 2% 15%; padding:1%; text-align:center">
+
+        <dl class="dl-horizontal">
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.Category.CategoryName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category.CategoryName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.User.UserType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.User.UserType)
+                </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobContent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobContent)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobImage)
+            </dt>
+
+            <dd>
+                <img src="~/Uploads/@Html.DisplayFor(model=>model.JobImage)"
+                     class="img-thumbnail" style="width:100px; height:100px" />
+            </dd>
+
+        </dl>
+        <hr />
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |*@
+            @*@Html.ActionLink("Back", "GetJobsByPublisherr", "home", null, new { @class = "btn btn-info" })*@
+
+        </p>
+    </div>
+
+</div>

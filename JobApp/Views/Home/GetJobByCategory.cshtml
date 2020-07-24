@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<JobApp.Models.Job>
+
+@{
+    ViewBag.Title = "Job by category";
+}
+
+@*<div class="row">
+    @foreach (var subItem in Model)
+    {
+        <div class="thumbnail col-sm-10 col-md-3 text-center">
+            <img src="~/Uploads/@subItem.JobImage" />
+            <h3>@Html.DisplayFor(modelItem => subItem.JobTitle)</h3>
+            <h5>@Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => subItem.JobContent).ToString()))</h5>
+            @Html.ActionLink("Details", "Details", new { JobId = subItem.Id }, new { @class = "btn btn-primary" })
+
+        </div>
+    }
+</div>*@
+
+<div class="row">
+    <div class="container">
+        @foreach (var subItem in Model)
+            {
+            <div class="col-md-3 thumbnail" style="margin-left:20px; margin-bottom:30px; height:350px;text-align:center">
+                <img src="~/Uploads/@subItem.JobImage" />
+                <div style="margin: 4% 0">
+                    <h3>@Html.DisplayFor(modelItem => subItem.JobTitle)</h3>
+                    <h5>@Html.DisplayFor(modelItem => subItem.JobContent)</h5>
+                </div>
+                @Html.ActionLink("Details", "Details", new { JobId = subItem.Id }, new { @class = "btn btn-warning btn-block" })
+            </div>
+        }
+    </div>
+</div>

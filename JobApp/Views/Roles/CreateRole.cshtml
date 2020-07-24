@@ -1,0 +1,82 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "CreateRole";
+}
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Create Role</h3>
+        <hr />
+
+        <div class="alert alert-danger text-center" id="error-div" style="display:none">
+            <span id="view-err">
+
+            </span>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" id="create" class="btn btn-default" style="margin-right: 2%" />
+                @Html.ActionLink("Back to List", "GetAllRoles", null, new { @class = "btn btn-primary" })
+
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    
+<script>
+    $(function () {
+        $("#create").click(function () {
+
+            //Check if the input is Empty
+            if ($("#Name").val() == "") {
+                $("#view-err").html("");
+
+                $("#error-div").fadeIn();
+                $("#view-err").append("Please insert value");
+                return false;
+            }
+
+           
+
+            if ($("#Name").val() != "") {
+                var elem = document.getElementById("Name");
+
+                // Allow A-Z, a-z, 0-9 and underscore. Min 1 char.
+                var letters = /^[A-Za-z]+$/;
+                if (elem.value.match(letters)) {
+                    return true;
+                }
+                else {
+                    $("#view-err").html("");
+
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("Only String");
+                    return false;
+                }
+                }
+
+            
+        });
+    });
+</script>
+
+    }

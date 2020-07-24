@@ -1,0 +1,71 @@
+﻿@model JobApp.Models.Job
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Job Details</h2>
+<div class="container">
+    <div style="margin:0 auto; width:60%">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.CategoryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobContent)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobContent)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobImage)
+            </dt>
+
+            <dd>
+                <img src="~/Uploads/@Html.DisplayFor(model=>model.JobImage)"
+                     class="thumbnail"
+                     style="width:128px; height:128px;" />
+            </dd>
+
+
+
+            <dt>
+                @Html.ActionLink("Apply to this job", "Apply", new { id = Model.Id }, new { @class = "btn btn-success" })
+            </dt>
+            <dd>
+                @Html.ActionLink("Back to Home", "Index", new { @class = "btn btn-success" })
+            </dd>
+        </dl>
+    </div>
+</div>
+<style>
+    dd {
+    
+    
+    }
+    dl {
+
+    padding :60px;
+    color:blue;
+
+
+    }
+
+
+</style>

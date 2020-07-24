@@ -1,0 +1,48 @@
+﻿@model JobApp.Models.Category
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div>
+
+
+    <h2 style="color:darkcyan">Create Category</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="text-align:center">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group" style="color:cadetblue">
+                <div>
+                    @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="color:cadetblue">
+                @Html.LabelFor(model => model.CategoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.CategoryDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CategoryDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align:center">
+                    <input type="submit" value="Add" class="btn btn-success" />
+           
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning" })
+            </div>
+        </div>
+    }
+
+    
+</div>

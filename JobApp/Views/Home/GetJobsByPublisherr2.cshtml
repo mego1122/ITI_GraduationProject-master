@@ -1,0 +1,33 @@
+﻿@model IEnumerable<JobApp.Models.JobsViewModel>
+
+@foreach (var gr in Model)
+{
+    <h3>@gr.JobTitle</h3>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                Employee name
+            </th>
+            <th>
+                message
+            </th>
+            <th>
+                Date of sent
+            </th>
+        </tr>
+        @foreach (var item in gr.Items)
+        {
+            <tr>
+                <td>
+                    @item.UserId
+                </td>
+                <td>
+                    @item.Message
+                </td>
+                <td>
+                    @item.ApplyDate
+                </td>
+            </tr>
+        }
+    </table>
+}

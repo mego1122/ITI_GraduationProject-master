@@ -1,0 +1,156 @@
+﻿
+@using Microsoft.AspNet.Identity
+@using JobApp.Models;
+
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+    {
+        var db = new ApplicationDbContext();
+        var UserID = User.Identity.GetUserId();
+        var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" style="color:white;margin-top:0px" data-toggle="dropdown">
+                    <span class="fa fa-user"></span>
+                    <span>Hello   @CurrentUser.UserName</span>
+                    <span class="fa fa-chevron-down"></span>
+                </a>
+                @if (CurrentUser.UserType != "Admin") { 
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-user">
+                            <div class="container" style="text-align:center">
+
+                                @if (CurrentUser.UserType == "Publisher")
+                                {
+                                    <a href="~/Home/GetJobsByPublisherr2" class="btn btn-success" style="margin:5%">Jobs U Published</a>
+                                        <a href="~/Jobs/Create" class="btn btn-success" style="margin:5%">Post New Job</a>
+                                }
+                   
+                                else
+                                {
+                                    <a href="~/Home/GetJobsByUser" class="btn btn-success" style="margin:5%">Jobs u Apply</a>
+                                }
+                                <a href="~/Publisher/ShowProfile" class="btn btn-primary" style="margin:5%">Edit Profile</a>
+                            </div>
+                        </div>
+                    </li>
+                    @*<li class="divider"></li>
+                    <li>
+                        <div class="text-center">
+                            <a href="javascript:document.getElementById('logoff').submit()" class="btn btn-danger btn-sm"> Logout</a>
+                        </div>
+                    </li>*@
+                </ul>
+                }
+            </li>
+            <li class="nav-menu">
+                    <a href="javascript:document.getElementById('logoff').submit()"> Logout</a>
+            </li>
+
+
+
+
+        </ul>
+    }
+}
+
+else
+{
+    <ul class="nav-menu navbar-right">
+        <li>
+            <a href="~/Account/Login">
+                Login
+            </a>
+        </li>
+
+        <li>
+            <a href="~/Account/Register" >
+                Signup
+            </a>
+        </li>
+    </ul>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+         @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello, :"+ User.Identity.GetUserName(), "Index", "Manage");
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoff').submit">Log Out</a>
+            </li>
+        </ul>
+    }
+
+}
+else
+{
+ 
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="~/Account/Login">
+            <i class="glyphicon glyphicon-user"></i>
+            Login
+        </a>
+    </li>
+    <li>
+        <a href="~/Account/Register">
+            <i class="glyphicon glyphicon-lock"></i>
+            Signup
+        </a>
+    </li>
+</ul>
+}*@
+

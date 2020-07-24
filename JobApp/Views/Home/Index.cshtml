@@ -1,0 +1,92 @@
+﻿@model IEnumerable<JobApp.Models.Category>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="alert alert-danger text-center" id="error-div" style="display:none">
+    <span id="view-err">
+
+    </span>
+</div>
+
+<div class="row" style="margin:3% auto">
+    <form action="/Home/Search" method="post" class="serach-form-area">
+        <div class="row justify-content-center form-wrap">
+            <div class="col-lg-3 col-sm-12 "></div>
+            <div class="col-lg-4 col-sm-12 form-cols">
+                <input type="text" class="form-control" name="searchtxt" id="searchtxt" placeholder="what are you Searching for?">
+            </div>
+            <div class="col-lg-2 col-sm-12 form-cols">
+                <button type="submit" id="search" class="btn btn-info">
+                    <span class="lnr lnr-magnifier"></span> Search
+                </button>
+            </div>
+            <div class="col-lg-3 col-sm-12"></div>
+        </div>
+    </form>
+</div>
+
+<div class="row  alert alert-info d-flex justify-content-center" style="margin-bottom:8px;">
+    <div class="menu-content">
+        <div class="title text-center">
+            <h1>Featured Job Categories</h1>
+            <p>Who are in extremely love with eco friendly system.</p>
+        </div>
+    </div>
+</div>
+<div class="row jumbotron">
+    @foreach (var item in Model)
+    {
+      
+        <div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom:1%">
+            <div class="single-fcat">
+                <img src="~/Images/o1.png" alt="">
+                <p>@Html.ActionLink(item.CategoryName, "GetJobByCategory", new { id = item.Id })</p>
+            </div>
+        </div>
+    } 
+
+   
+</div>
+
+
+@section scripts {
+
+    <script>
+    $(function () {
+        $("#search").click(function () {
+
+            //Check if the input is Empty
+            if ($("#searchtxt").val() == "") {
+                $("#view-err").html("");
+
+                $("#error-div").fadeIn();
+                $("#view-err").append("Please insert value");
+                return false;
+            }
+
+
+
+            if ($("#searchtxt").val() != "") {
+                var elem = document.getElementById("searchtxt");
+
+                // Allow A-Z, a-z, 0-9 and underscore. Min 1 char.
+                var letters = /^[A-Za-z]+$/;
+                if (elem.value.match(letters)) {
+                    return true;
+                }
+                else {
+                    $("#view-err").html("");
+
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("Only String");
+                    return false;
+                }
+                }
+
+
+        });
+    });
+    </script>
+
+    }
